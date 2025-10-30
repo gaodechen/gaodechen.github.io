@@ -6,7 +6,7 @@ subtitle: 🎓 CS PhD Candidate | 🏫 UC Davis | 📨 dechengao at gmail dot co
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: prof.jpg
   image_circular: false # crops the image to make it circular
   more_info:
 
