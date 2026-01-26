@@ -778,6 +778,27 @@ footer.sticky-bottom {
         }
       }
 
+      .venue-pill {
+        display: inline-block;
+        padding: 0.1rem 0.5rem;
+        border-radius: 999px;
+        background-color: var(--global-theme-color);
+        color: var(--global-card-bg-color);
+        font-size: 0.8rem;
+        font-weight: 600;
+        vertical-align: middle;
+        line-height: 1.4;
+
+        a {
+          color: inherit;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
       .title {
         font-weight: bolder;
       }
