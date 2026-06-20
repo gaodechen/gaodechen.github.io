@@ -30,14 +30,23 @@
 
   "work": [
     {
+      "name": "Meta",
+      "position": "Research Scientist Intern",
+      "url": "",
+      "icon": "meta.svg",
+      "location": "Redmond, WA",
+      "startDate": "2026-06-01",
+      "endDate": "2026-09-01",
+      "summary": "Robot policy learning. Dexterous manipulation."
+    },
+    {
       "name": "Amazon",
       "position": "Applied Scientist Intern",
       "url": "",
       "icon": "amazon.svg",
       "location": "Seattle, WA",
       "startDate": "2025-06-01",
-      "endDate": "2025-09-01",
-      "summary": "LLMs and reinforcement learning fine-tuning."
+      "endDate": "2025-09-01"
     },
     {
       "name": "TikTok",
@@ -46,8 +55,7 @@
       "icon": "tiktok.svg",
       "location": "San Jose, CA",
       "startDate": "2024-06-01",
-      "endDate": "2024-09-01",
-      "summary": "Multi-modal understanding and LLMs."
+      "endDate": "2024-09-01"
     },
     {
       "name": "Meta",
