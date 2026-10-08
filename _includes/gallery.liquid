@@ -3,7 +3,8 @@
     <h2 id="gallery-title">Gallery<span class="gallery-title-dot" aria-hidden="true">.</span></h2>
   </div>
   <div class="gallery-grid" id="gallery-grid">
-    {% for photo in site.data.gallery %}
+    {% assign gallery_photos = site.data.gallery | where_exp: 'photo', 'photo.disabled != true' %}
+    {% for photo in gallery_photos %}
       <a
         class="gallery-tile"
         href="{{ photo.file | prepend: '/assets/gallery/' | relative_url }}"

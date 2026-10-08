@@ -29,7 +29,8 @@
     "width": 855,
     "height": 1079,
     "wide": false,
-    "color": "158, 144, 97"
+    "color": "158, 144, 97",
+    "disabled": true
   },
   {
     "file": "photo-08.jpg",
@@ -61,7 +62,8 @@
     "width": 768,
     "height": 1024,
     "wide": false,
-    "color": "158, 129, 97"
+    "color": "158, 129, 97",
+    "disabled": true
   },
   {
     "file": "photo-04.jpg",
@@ -125,7 +127,8 @@
     "width": 768,
     "height": 1024,
     "wide": false,
-    "color": "189, 116, 66"
+    "color": "189, 116, 66",
+    "disabled": true
   },
   {
     "file": "photo-14.jpg",
@@ -205,7 +208,8 @@
     "width": 768,
     "height": 1024,
     "wide": false,
-    "color": "204, 146, 51"
+    "color": "204, 146, 51",
+    "disabled": true
   },
   {
     "file": "photo-23.jpg",
@@ -221,7 +225,8 @@
     "width": 768,
     "height": 1024,
     "wide": false,
-    "color": "191, 116, 64"
+    "color": "191, 116, 64",
+    "disabled": true
   },
   {
     "file": "photo-21.jpg",
