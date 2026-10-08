@@ -1,0 +1,93 @@
+---
+---
+<article class="paper{% if entry.key == 'gao2025vitavisiontoactionflowmatching' %} paper-featured{% endif %}" aria-labelledby="title-{{ entry.key }}">
+  <div class="paper-visual">
+    {% assign preview = entry.preview %}
+    {% unless preview contains '://' %}{% assign preview = preview | prepend: '/assets/img/publication_preview/' | relative_url %}{% endunless %}
+    {% assign paper_url = entry.html %}
+    {% unless paper_url -%}
+      {%- if entry.arxiv -%}
+        {%- assign paper_url = entry.arxiv | prepend: 'https://arxiv.org/abs/' -%}
+      {%- elsif entry.pdf -%}
+        {%- assign paper_url = entry.pdf -%}
+      {%- endif -%}
+    {%- endunless %}
+    {% if paper_url %}<a href="{{ paper_url }}" tabindex="-1" aria-hidden="true">{% endif %}
+    {% if entry.preview_video %}
+      <video
+        class="paper-media"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="{{ preview }}"
+        aria-label="{{ entry.title | escape }} demonstration"
+      >
+        <source src="{{ entry.preview_video | prepend: '/assets/img/publication_preview/' | relative_url }}" type="video/mp4">
+      </video>
+    {% else %}
+      <img
+        class="paper-media"
+        src="{{ preview }}"
+        {% if entry.preview_still %}
+          data-still="{{ entry.preview_still | prepend: '/assets/img/publication_preview/' | relative_url }}"
+        {% endif %}
+        alt="{{ entry.title | escape }} — research preview"
+        loading="lazy"
+        width="400"
+        height="260"
+      >
+    {% endif %}
+    {% if paper_url %}</a>{% endif %}
+  </div>
+  <div class="paper-copy">
+    <div class="paper-meta">
+      <span class="venue{% if entry.abbr != 'Preprint' %} venue-published{% endif %}">
+        {{- entry.abbr -}}
+        {%- if entry.key == 'gao2025vitavisiontoactionflowmatching' %} 2026{% else %} {{ entry.year }}{% endif -%}
+      </span>
+    </div>
+    <h3 id="title-{{ entry.key }}">
+      {% if paper_url %}<a href="{{ paper_url }}">{% endif -%}
+      {{- entry.title -}}
+      {%- if paper_url %}</a>{% endif %}
+    </h3>
+    <p class="authors">
+      {% for author in entry.author_array -%}
+        {%- unless forloop.first %}, {% endunless -%}
+        {%- if author.last == 'Gao' and author.first == 'Dechen' -%}
+          <strong>
+            {{- author.first }}
+            {{ author.last -}}
+          </strong>
+        {%- else -%}
+          {{- author.first }}
+          {{ author.last -}}
+        {%- endif -%}
+      {%- endfor %}
+    </p>
+    <div class="paper-links">
+      {% if entry.html -%}
+        <a href="{{ entry.html }}">Project <span aria-hidden="true">↗</span></a>
+      {%- endif %}
+      {% if entry.arxiv -%}
+        <a href="https://arxiv.org/abs/{{ entry.arxiv }}">Paper <span aria-hidden="true">↗</span></a>
+      {%- elsif entry.pdf -%}
+        <a href="{{ entry.pdf }}">Paper <span aria-hidden="true">↗</span></a>
+      {%- endif %}
+      {% if entry.code -%}
+        <a href="{{ entry.code }}">Code <span aria-hidden="true">↗</span></a>
+      {%- endif %}
+      {% if entry.dataset -%}
+        <a href="{{ entry.dataset }}">Dataset <span aria-hidden="true">↗</span></a>
+      {%- endif %}
+      {% if entry.bibtex_show %}
+        <details class="citation">
+          <summary>BibTeX <span aria-hidden="true">+</span></summary>
+          <pre>{{ entry.bibtex | hideCustomBibtex | escape }}</pre>
+        </details>
+      {% endif %}
+    </div>
+  </div>
+</article>
