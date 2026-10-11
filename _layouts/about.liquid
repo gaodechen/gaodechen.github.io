@@ -1,104 +1,76 @@
----
-layout: default
----
-<div class="post">
-  <header class="post-header">
-    <h1 class="post-title">
-      {% if site.title == 'blank' %}
-        <span class="font-weight-bold">{{ site.first_name }}</span>
-        {{ site.middle_name }}
-        {{ site.last_name }}
-      {% else %}
-        {{ site.title }}
-      {% endif %}
-    </h1>
-    <p class="desc">
-      <strong>{{ page.subtitle }}</strong>
-    </p>
-  </header>
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include google-analytics.liquid %}
+    {% include metadata.liquid %}
+    {% include site-style.liquid %}
+    <link rel="stylesheet" href="{{ '/assets/css/gallery.css' | relative_url }}">
+    <script src="{{ '/assets/js/gallery.js' | relative_url }}" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      {% include site-nav.liquid %}
+      <main id="main">
+        <section class="intro" aria-labelledby="name">
+          <header class="intro-heading">
+            <h1 id="name">
+              {{ site.first_name }}
+              {{ site.middle_name }}
+              {{ site.last_name }}
+            </h1>
+            <p class="subtitle">{{ page.subtitle }}</p>
+          </header>
+          <div class="biography">{{ content }}</div>
+          <figure class="portrait">
+            <img
+              src="{{ page.profile.image | prepend: '/assets/img/' | relative_url }}"
+              alt="Dechen Gao"
+              width="228"
+              height="285"
+              fetchpriority="high"
+            >
+          </figure>
+          <div class="social-links" aria-label="Social links">
+            <a href="mailto:dechengao@gmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i>Email</a>
+            <a href="https://scholar.google.com/citations?user=a-Dp92MAAAAJ&amp;hl=en"
+              ><i class="ai ai-google-scholar" aria-hidden="true"></i>Google Scholar</a
+            >
+            <a href="https://github.com/gaodechen"><i class="fa-brands fa-github" aria-hidden="true"></i>GitHub</a>
+            <a href="https://www.linkedin.com/in/gao-dechen/"><i class="fa-brands fa-linkedin" aria-hidden="true"></i>LinkedIn</a>
+          </div>
+        </section>
 
-  <article>
-    {% if page.profile %}
-      <div class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
-        {% if page.profile.image %}
-          {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
-          {% if page.profile.image_circular %}
-            {% assign profile_image_class = 'img-fluid z-depth-1 rounded-circle' %}
-          {% else %}
-            {% assign profile_image_class = 'img-fluid z-depth-1 rounded' %}
-          {% endif %}
-          {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3}}px,
-(min-width: 576px) 30vw, 95vw"{% endcapture %}
-          {%
-            include figure.liquid
-            loading="eager"
-            path=profile_image_path
-            class=profile_image_class
-            sizes=sizes
-            alt=page.profile.image
-            cache_bust=true
-          %}
-        {% endif %}
-        {% if page.profile.more_info %}
-          <div class="more-info">{{ page.profile.more_info }}</div>
-        {% endif %}
-      </div>
-    {% endif %}
-
-    <div class="clearfix">{{ content }}</div>
-
-    <!-- News -->
-    {% if page.announcements and page.announcements.enabled %}
-      <h2>
-        <a href="{{ '/news/' | relative_url }}" style="color: inherit">News</a>
-      </h2>
-      {% include news.liquid limit=true %}
-    {% endif %}
-
-    <!-- Education/Work from site.data.resume -->
-    <div class="cv">
-      {% for section in site.data.resume %}
-        {% assign section_key = section[0] %}
-        {% assign section_value = section[1] %}
-        {% if site.jsonresume and site.jsonresume.size > 0 %}
-          {% unless site.jsonresume contains section_key %}
-            {% continue %}
-          {% endunless %}
-        {% endif %}
-        {% if section_key == 'meta' or section_value.size == 0 %}
-          {% continue %}
+        {% if page.announcements and page.announcements.enabled %}
+          <section id="news" class="news-section" aria-labelledby="news-title">
+            <h2 id="news-title"><a href="{{ '/news/' | relative_url }}">News</a></h2>
+            {% include news.liquid limit=true %}
+          </section>
         {% endif %}
 
-        {% if section_key == 'education' %}
-          <h2>Education</h2>
-          {% include resume/education.liquid data=section_value %}
-        {% endif %}
+        <div class="credentials">
+          <section id="experience" aria-labelledby="experience-title">
+            <h2 id="experience-title">Experience</h2>
+            {% include resume/work.liquid data=site.data.resume.work %}
+          </section>
+          <section id="education" aria-labelledby="education-title">
+            <h2 id="education-title">Education</h2>
+            {% include resume/education.liquid data=site.data.resume.education %}
+          </section>
+        </div>
 
-        {% if section_key == 'work' %}
-          <h2>Experience</h2>
-          {% include resume/work.liquid data=section_value %}
+        {% if page.selected_papers %}
+          <section class="research" id="research" aria-labelledby="research-title">
+            <div class="section-heading">
+              <h2 id="research-title"><a href="{{ '/publications/' | relative_url }}">Selected Publications</a></h2>
+              <a class="show-all-link" href="{{ "/publications/" | relative_url }}">Show All <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="research-list">{% bibliography --group_by none --template home-paper --query @*[selected=true]* %}</div>
+          </section>
         {% endif %}
-      {% endfor %}
+        {% include gallery.liquid %}
+      </main>
+      {% include site-footer.liquid %}
     </div>
-
-    <!-- Selected Publications -->
-    {% if page.selected_papers %}
-      <h2>
-        <a href="{{ '/publications/' | relative_url }}" style="color: inherit"> Selected Publications </a>
-      </h2>
-      {% include selected_papers.liquid %}
-    {% endif %}
-
-    <!-- Social Links -->
-    {% if page.social %}
-      <div class="social">
-        <div class="contact-icons">{% include social.liquid %}</div>
-        <div class="contact-note">{{ site.contact_note }}</div>
-      </div>
-    {% endif %}
-
-    {% if site.newsletter and site.newsletter.enabled and site.footer_fixed %}
-      {% include newsletter.liquid center=true %}
-    {% endif %}
-  </article>
-</div>
+  </body>
+</html>

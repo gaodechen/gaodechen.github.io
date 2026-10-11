@@ -1,0 +1,28 @@
+{% assign is_home = false %}
+{% if page.url == '/' %}{% assign is_home = true %}{% endif %}
+<nav class="page-nav unified-nav" aria-label="Main navigation">
+  <a
+    href="{% if is_home %}#main{% else %}{{ '/' | relative_url }}{% endif %}"
+    {% if is_home %}
+      aria-current="page"
+    {% endif %}
+    >About</a
+  >
+  <a
+    href="{% if is_home %}#news{% else %}{{ '/news/' | relative_url }}{% endif %}"
+    {% if page.url contains '/news/' %}
+      aria-current="page"
+    {% endif %}
+    >News</a
+  >
+  <a href="{% if is_home %}#experience{% else %}{{ '/#experience' | relative_url }}{% endif %}">Experience</a>
+  <a href="{% if is_home %}#education{% else %}{{ '/#education' | relative_url }}{% endif %}">Education</a>
+  <a
+    href="{% if is_home %}#research{% else %}{{ '/publications/' | relative_url }}{% endif %}"
+    {% if page.url contains '/publications/' %}
+      aria-current="page"
+    {% endif %}
+    >Publications</a
+  >
+  <a href="{% if is_home %}#gallery{% else %}{{ '/#gallery' | relative_url }}{% endif %}">Gallery</a>
+</nav>
