@@ -1,7 +1,4 @@
-// get the ninja-keys element
 const ninja = document.querySelector('ninja-keys');
-
-// add the home and posts menu items
 ninja.data = [{
     id: "nav-about",
     title: "About",
@@ -385,8 +382,8 @@ ninja.data = [{
           section: "News",},{id: "news-we-present-vita-accepted-to-iclr-2026-vision-to-action-flow-matching-policy-which-evolves-latent-images-instead-of-random-gaussian-to-actions-vita-is-the-first-mlp-only-policy-that-handles-complex-real-world-bimanual-tasks-such-as-aloha",
           title: 'We present VITA (accepted to ICLR 2026), vision-to-action flow matching policy, which evolves...',
           description: "",
-          section: "News",},{id: "news-check-out-gnr-my-work-at-meta-reality-labs-research-we-created-the-largest-real-to-sim-human-to-robot-dexterous-retargeting-dataset-to-date-with-dense-contact-force-labels-tackles-long-horizon-millimeter-precision-challenges",
-          title: 'Check out GNR, my work at Meta Reality Labs Research. We created the...',
+          section: "News",},{id: "news-gnr-scalable-human-to-robot-retargeting-for-dexterous-manipulation",
+          title: 'GNR: Scalable human-to-robot retargeting for dexterous manipulation.',
           description: "",
           section: "News",},{id: "projects-project-1",
           title: 'project 1',
@@ -453,6 +450,13 @@ ninja.data = [{
         section: 'Socials',
         handler: () => {
           window.open("https://scholar.google.com/citations?user=Dp92MAAAAJ", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://x.com/DechenGao", "_blank");
         },
       },{
       id: 'light-theme',
