@@ -1,6 +1,3 @@
-// Has to be in the head tag, otherwise a flicker effect will occur.
-
-// Toggle through light, dark, and system theme settings.
 let toggleThemeSetting = () => {
   let themeSetting = determineThemeSetting();
   if (themeSetting == "system") {
@@ -12,7 +9,6 @@ let toggleThemeSetting = () => {
   }
 };
 
-// Change the theme setting and apply the theme.
 let setThemeSetting = (themeSetting) => {
   localStorage.setItem("theme", themeSetting);
 
@@ -21,7 +17,6 @@ let setThemeSetting = (themeSetting) => {
   applyTheme();
 };
 
-// Apply the computed dark or light theme to the website.
 let applyTheme = () => {
   let theme = determineComputedTheme();
 
@@ -30,29 +25,24 @@ let applyTheme = () => {
   setGiscusTheme(theme);
   setSearchTheme(theme);
 
-  // if mermaid is not defined, do nothing
   if (typeof mermaid !== "undefined") {
     setMermaidTheme(theme);
   }
 
-  // if diff2html is not defined, do nothing
   if (typeof Diff2HtmlUI !== "undefined") {
     setDiff2htmlTheme(theme);
   }
 
-  // if echarts is not defined, do nothing
   if (typeof echarts !== "undefined") {
     setEchartsTheme(theme);
   }
 
-  // if vegaEmbed is not defined, do nothing
   if (typeof vegaEmbed !== "undefined") {
     setVegaLiteTheme(theme);
   }
 
   document.documentElement.setAttribute("data-theme", theme);
 
-  // Add class to tables.
   let tables = document.getElementsByTagName("table");
   for (let i = 0; i < tables.length; i++) {
     if (theme == "dark") {
@@ -62,7 +52,6 @@ let applyTheme = () => {
     }
   }
 
-  // Set jupyter notebooks themes.
   let jupyterNotebooks = document.getElementsByClassName("jupyter-notebook-iframe-container");
   for (let i = 0; i < jupyterNotebooks.length; i++) {
     let bodyElement = jupyterNotebooks[i].getElementsByTagName("iframe")[0].contentWindow.document.body;
@@ -75,10 +64,9 @@ let applyTheme = () => {
     }
   }
 
-  // Updates the background of medium-zoom overlay.
   if (typeof medium_zoom !== "undefined") {
     medium_zoom.update({
-      background: getComputedStyle(document.documentElement).getPropertyValue("--global-bg-color") + "ee", // + 'ee' for trasparency.
+      background: getComputedStyle(document.documentElement).getPropertyValue("--global-bg-color") + "ee",
     });
   }
 };
@@ -123,14 +111,10 @@ let addMermaidZoom = (records, observer) => {
 
 let setMermaidTheme = (theme) => {
   if (theme == "light") {
-    // light theme name in mermaid is 'default'
-    // https://mermaid.js.org/config/theming.html#available-themes
     theme = "default";
   }
 
-  /* Re-render the SVG, based on https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/_includes/mermaid.html */
   document.querySelectorAll(".mermaid").forEach((elem) => {
-    // Get the code block content from previous element, since it is the mermaid code itself as defined in Markdown, but it is hidden
     let svgCode = elem.previousSibling.childNodes[0].innerHTML;
     elem.removeAttribute("data-processed");
     elem.innerHTML = svgCode;
@@ -149,7 +133,6 @@ let setMermaidTheme = (theme) => {
 
 let setDiff2htmlTheme = (theme) => {
   document.querySelectorAll(".diff2html").forEach((elem) => {
-    // Get the code block content from previous element, since it is the diff code itself as defined in Markdown, but it is hidden
     let textData = elem.previousSibling.childNodes[0].innerHTML;
     elem.innerHTML = "";
     const configuration = { colorScheme: theme, drawFileList: true, highlight: true, matching: "lines" };
@@ -160,7 +143,6 @@ let setDiff2htmlTheme = (theme) => {
 
 let setEchartsTheme = (theme) => {
   document.querySelectorAll(".echarts").forEach((elem) => {
-    // Get the code block content from previous element, since it is the echarts code itself as defined in Markdown, but it is hidden
     let jsonData = elem.previousSibling.childNodes[0].innerHTML;
     echarts.dispose(elem);
 
@@ -176,7 +158,6 @@ let setEchartsTheme = (theme) => {
 
 let setVegaLiteTheme = (theme) => {
   document.querySelectorAll(".vega-lite").forEach((elem) => {
-    // Get the code block content from previous element, since it is the vega lite code itself as defined in Markdown, but it is hidden
     let jsonData = elem.previousSibling.childNodes[0].innerHTML;
     elem.innerHTML = "";
     if (theme === "dark") {
@@ -205,8 +186,6 @@ let transTheme = () => {
   }, 500);
 };
 
-// Determine the expected state of the theme toggle, which can be "dark", "light", or
-// "system". Default is "system".
 let determineThemeSetting = () => {
   let themeSetting = localStorage.getItem("theme");
   if (themeSetting != "dark" && themeSetting != "light" && themeSetting != "system") {
@@ -215,9 +194,8 @@ let determineThemeSetting = () => {
   return themeSetting;
 };
 
-// Determine the computed theme, which can be "dark" or "light". If the theme setting is
-// "system", the computed theme is determined based on the user's system preference.
 let determineComputedTheme = () => {
+  if (document.documentElement.dataset.siteAppearance === "light") return "light";
   let themeSetting = determineThemeSetting();
   if (themeSetting == "system") {
     const userPref = window.matchMedia;
@@ -236,7 +214,6 @@ let initTheme = () => {
 
   setThemeSetting(themeSetting);
 
-  // Add event listener to the theme toggle button.
   document.addEventListener("DOMContentLoaded", function () {
     const mode_toggle = document.getElementById("light-toggle");
 
@@ -245,7 +222,6 @@ let initTheme = () => {
     });
   });
 
-  // Add event listener to the system theme preference change.
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
     applyTheme();
   });

@@ -29,38 +29,24 @@
  * SOFTWARE.
  */
 
-/**
- * Highlight search term in the selected elements
- *
- * @example
- * import { highlightSearchTerm } from "highlight-search-term";
- * const search = document.getElementById("search");
- * search.addEventListener("input", () => {
- *   highlightSearchTerm({ search: search.value, selector: ".content" });
- * });
- */
 const highlightSearchTerm = ({ search, selector, customHighlightName = "search" }) => {
   if (!selector) {
     throw new Error("The selector argument is required");
   }
 
-  if (!CSS.highlights) return; // disable feature on Firefox as it does not support CSS Custom Highlight API
+  if (!CSS.highlights) return;
 
-  // remove previous highlight
   CSS.highlights.delete(customHighlightName);
   if (!search) {
-    // nothing to highlight
     return;
   }
-  // find all text nodes containing the search term
+
   const ranges = [];
   const nonMatchingElements = [];
   const elements = document.querySelectorAll(selector);
   Array.from(elements).map((element) => {
     let match = false;
     getTextNodesInElementContainingText(element, search).forEach((node) => {
-      // Modified variant of highlight-search-term
-      // We return the non-matching elements in addition.
       const rangesForSearch = getRangesForSearchTermInNode(node, search);
       ranges.push(...rangesForSearch);
       if (rangesForSearch.length > 0) {
@@ -71,11 +57,11 @@ const highlightSearchTerm = ({ search, selector, customHighlightName = "search" 
       nonMatchingElements.push(element);
     }
   });
-  if (ranges.length === 0) return nonMatchingElements; // modified: return `nonMatchingElements`
-  // create a CSS highlight that can be styled with the ::highlight(search) pseudo-element
+  if (ranges.length === 0) return nonMatchingElements;
+
   const highlight = new Highlight(...ranges);
   CSS.highlights.set(customHighlightName, highlight);
-  return nonMatchingElements; // modified: return `nonMatchingElements`
+  return nonMatchingElements;
 };
 
 const getTextNodesInElementContainingText = (element, text) => {
@@ -90,7 +76,6 @@ const getTextNodesInElementContainingText = (element, text) => {
   return nodes;
 };
 
-// Fix: We changed this function to work on the node directly, rather than on its parent element.
 const getRangesForSearchTermInNode = (node, search) => {
   const ranges = [];
   const text = (node.textContent ? node.textContent.toLowerCase() : "") || "";

@@ -1,5 +1,4 @@
 $(document).ready(function () {
-  // add toggle functionality to abstract, award and bibtex buttons
   $("a.abstract").click(function () {
     $(this).parent().parent().find(".abstract.hidden").toggleClass("open");
     $(this).parent().parent().find(".award.hidden.open").toggleClass("open");
@@ -17,9 +16,7 @@ $(document).ready(function () {
   });
   $("a").removeClass("waves-effect waves-light");
 
-  // bootstrap-toc
   if ($("#toc-sidebar").length) {
-    // remove related publications years from the TOC
     $(".publications h2").each(function () {
       $(this).attr("data-toc-skip", "");
     });
@@ -31,7 +28,6 @@ $(document).ready(function () {
     });
   }
 
-  // add css to jupyter notebooks
   const cssLink = document.createElement("link");
   cssLink.href = "../css/jupyter.css";
   cssLink.rel = "stylesheet";
@@ -52,7 +48,6 @@ $(document).ready(function () {
     }
   });
 
-  // trigger popovers
   $('[data-toggle="popover"]').popover({
     trigger: "hover",
   });

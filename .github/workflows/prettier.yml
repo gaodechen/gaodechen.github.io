@@ -12,7 +12,6 @@ on:
 
 jobs:
   check:
-    # available images: https://github.com/actions/runner-images#available-images
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
@@ -25,7 +24,7 @@ jobs:
         id: prettier
         run: npx prettier . --check
       - name: Create diff 📝
-        # https://docs.github.com/en/actions/learn-github-actions/expressions#failure
+
         if: ${{ failure() }}
         run: |
           npx prettier . --write

@@ -31,21 +31,17 @@ module Jekyll
       article_url = "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=#{scholar_id}&citation_for_view=#{scholar_id}:#{article_id}"
 
       begin
-          # If the citation count has already been fetched, return it
+
           if GoogleScholarCitationsTag::Citations[article_id]
             return GoogleScholarCitationsTag::Citations[article_id]
           end
 
-          # Sleep for a random amount of time to avoid being blocked
           sleep(rand(1.5..3.5))
 
-          # Fetch the article page
           doc = Nokogiri::HTML(URI.open(article_url, "User-Agent" => "Ruby/#{RUBY_VERSION}"))
 
-          # Attempt to extract the "Cited by n" string from the meta tags
           citation_count = 0
 
-          # Look for meta tags with "name" attribute set to "description"
           description_meta = doc.css('meta[name="description"]')
           og_description_meta = doc.css('meta[property="og:description"]')
 
@@ -69,10 +65,9 @@ module Jekyll
         citation_count = Helpers.number_to_human(citation_count, :format => '%n%u', :precision => 2, :units => { :thousand => 'K', :million => 'M', :billion => 'B' })
 
       rescue Exception => e
-        # Handle any errors that may occur during fetching
+
         citation_count = "N/A"
 
-        # Print the error message including the exception class and message
         puts "Error fetching citation count for #{article_id} in #{article_url}: #{e.class} - #{e.message}"
       end
 

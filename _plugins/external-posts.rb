@@ -42,12 +42,12 @@ module ExternalPosts
     end
 
     def create_document(site, source_name, url, content)
-      # check if title is composed only of whitespace or foreign characters
+
       if content[:title].gsub(/[^\w]/, '').strip.empty?
-        # use the source name and last url segment as fallback
+
         slug = "#{source_name.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')}-#{url.split('/').last}"
       else
-        # parse title from the post or use the source name and last url segment as fallback
+
         slug = content[:title].downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
         slug = "#{source_name.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')}-#{url.split('/').last}" if slug.empty?
       end
@@ -102,7 +102,7 @@ module ExternalPosts
         title: title,
         content: body_content,
         summary: description
-        # Note: The published date is now added in the fetch_from_urls method.
+
       }
     end
 

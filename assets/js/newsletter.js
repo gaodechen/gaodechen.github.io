@@ -18,13 +18,10 @@ function submitHandler(event) {
     backButton.style.display = "block";
   };
 
-  // Compare current time with time of previous sign up
   var time = new Date();
   var timestamp = time.valueOf();
   var previousTimestamp = localStorage.getItem("loops-form-timestamp");
 
-  // If last sign up was less than a minute ago
-  // display error
   if (previousTimestamp && Number(previousTimestamp) + 60000 > timestamp) {
     rateLimit();
     return;
@@ -45,13 +42,9 @@ function submitHandler(event) {
     .then((res) => [res.ok, res.json(), res])
     .then(([ok, dataPromise, res]) => {
       if (ok) {
-        // If response successful
-        // display success
         success.style.display = "flex";
         form.reset();
       } else {
-        // If response unsuccessful
-        // display error message or response status
         dataPromise.then((data) => {
           errorContainer.style.display = "flex";
           errorMessage.innerText = data.message ? data.message : res.statusText;
@@ -59,13 +52,11 @@ function submitHandler(event) {
       }
     })
     .catch((error) => {
-      // check for cloudflare error
       if (error.message === "Failed to fetch") {
         rateLimit();
         return;
       }
-      // If error caught
-      // display error message if available
+
       errorContainer.style.display = "flex";
       if (error.message) errorMessage.innerText = error.message;
       localStorage.setItem("loops-form-timestamp", "");

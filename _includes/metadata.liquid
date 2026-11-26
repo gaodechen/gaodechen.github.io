@@ -1,22 +1,16 @@
 {% if site.enable_google_verification or site.enable_bing_verification %}
-  <!-- Website verification -->
   {% if site.enable_google_verification %}
     <meta name="google-site-verification" content="{{ site.google_site_verification }}">
   {% endif %}
   {% if site.enable_bing_verification %}
     <meta name="msvalidate.01" content="{{ site.bing_site_verification }}">
   {% endif %}
-  <!--
-    Avoid warning on Google Chrome Error with Permissions-Policy header:
-    Origin trial controlled feature not enabled: 'interest-cohort'.
-    see https://stackoverflow.com/a/75119417
-  -->
+
   <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 {% endif %}
 
 {% capture author_name %}{{ site.first_name }}{% if site.middle_name %} {{ site.middle_name }}{% endif %} {{ site.last_name }}{% endcapture %}
 
-<!-- Standard metadata -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -52,7 +46,6 @@
 {% endif %}
 
 {% if site.serve_og_meta %}
-  <!-- OpenGraph -->
   <meta property="og:site_name" content="{{ title }}">
   <meta property="og:type" content="{% if is_blog_post %}article{% else %}website{% endif %}">
   <meta property="og:title" content="{% if page.title %}{{ title }} | {{ page.title }}{% else %}{{ title }}{% endif %}">
@@ -63,7 +56,6 @@
   {% endif %}
   <meta property="og:locale" content="{{ site.lang }}">
 
-  <!-- Twitter card -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ title }}{% endif %}">
   <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
@@ -77,8 +69,6 @@
 {% endif %}
 
 {% if site.serve_schema_org %}
-  <!-- Schema.org -->
-  {% comment %} Social links generator for "sameAs schema" {% endcomment %}
   {% assign sameaslinks = '' | split: ',' %}
   {% if site.orcid_id %}
     {% capture link %}https://orcid.org/{{ site.orcid_id }}{% endcapture %}

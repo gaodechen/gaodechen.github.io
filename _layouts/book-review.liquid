@@ -6,7 +6,6 @@ layout: default
 {% assign categories = page.categories | join: '' %}
 
 {% if page._styles %}
-  <!-- Page/Post style -->
   <style type="text/css">
     {{ page._styles }}
   </style>
@@ -187,16 +186,15 @@ layout: default
 
         .empty-review{
           float: left;
-          display: block; /* in-line block; */
-          margin: 0px 0px 0px 0px;  /* adjust as needed */
+          display: block;
+          margin: 0px 0px 0px 0px;
           padding: 0px 0px 0px 20px;
-         /* top right bottom left */
+
           }
 
          .empty-review-caption {
                   caption-side: left;
                   text-align: left;
-
 
                   }
 
@@ -209,10 +207,10 @@ layout: default
           figure {
 
                 float: right;
-                display: in-line block; /* in-line block; */
-                margin: 0px 0px 0px 0px;  /* adjust as needed */
+                display: in-line block;
+                margin: 0px 0px 0px 0px;
                 padding: 0px 0px 0px 20px;
-               /* top right bottom left */
+
               }
 
           figure img {
@@ -229,8 +227,6 @@ layout: default
 
           .mobile-break { display: none; }
 
-  /* =Blockquote
-  -------------------------------------------------------------- */
   blockquote {
 
       position: relative;
@@ -240,13 +236,11 @@ layout: default
   }
   blockquote:before, blockquote:after {
 
-   /* properties to format the block quotes /*
 
   }
   blockquote:before {
       top: 0;
       left: 0;
-
 
   }
   blockquote:after {

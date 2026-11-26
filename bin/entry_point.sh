@@ -5,7 +5,6 @@ echo "Entry point script running"
 
 CONFIG_FILE=_config.yml
 
-# Function to manage Gemfile.lock
 manage_gemfile_lock() {
     git config --global --add safe.directory '*'
     if command -v git &> /dev/null && [ -f Gemfile.lock ]; then

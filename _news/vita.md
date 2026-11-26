@@ -2,6 +2,7 @@
 layout: post
 date: July 2025
 inline: true
+summary: "[VITA](https://ucd-dare.github.io/VITA), our vision-to-action flow matching policy, was accepted to ICLR 2026."
 related_posts: false
 ---
 

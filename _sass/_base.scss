@@ -1,9 +1,3 @@
-/*******************************************************************************
- * Styles for the base elements of the theme.
- ******************************************************************************/
-
-// Typography
-
 p,
 h1,
 h2,
@@ -71,7 +65,6 @@ blockquote {
     margin-bottom: 0;
   }
 
-  /* Tips, warnings, and dangers blockquotes */
   &.block-tip {
     border-color: var(--global-tip-block);
     background-color: var(--global-tip-block-bg);
@@ -136,14 +129,11 @@ blockquote {
   }
 }
 
-// Checklist
-
 ul.task-list {
-  list-style-type: none; /* Remove bullets from all levels */
+  list-style-type: none;
 }
 
 ul.task-list > li ul {
-  /* Nested lists within .task-list */
   padding-inline-start: 1.5rem;
 }
 
@@ -152,14 +142,10 @@ ul.task-list input[type="checkbox"] {
   vertical-align: middle;
 }
 
-// Math
-
 .equation {
   margin-bottom: 1rem;
   text-align: center;
 }
-
-// Caption
 
 .caption {
   font-size: 0.875rem;
@@ -167,8 +153,6 @@ ul.task-list input[type="checkbox"] {
   margin-bottom: 1.5rem;
   text-align: center;
 }
-
-// Card
 
 .card {
   background-color: var(--global-card-bg-color);
@@ -187,14 +171,10 @@ ul.task-list input[type="checkbox"] {
   }
 }
 
-// Citation
-
 .citation,
 .citation-number {
   color: var(--global-theme-color);
 }
-
-// Profile
 
 .profile {
   width: 100%;
@@ -244,8 +224,6 @@ ul.task-list input[type="checkbox"] {
     }
   }
 }
-
-// Navbar customization
 
 .navbar {
   box-shadow: none;
@@ -319,7 +297,6 @@ ul.task-list input[type="checkbox"] {
         width: 1.7rem;
         height: 1.7rem;
         margin-bottom: 0.5rem;
-        // margin: 0.5rem;
       }
 
       svg {
@@ -399,8 +376,6 @@ ul.task-list input[type="checkbox"] {
   }
 }
 
-// Social (bottom)
-
 .social {
   text-align: center;
 
@@ -475,7 +450,6 @@ ul.task-list input[type="checkbox"] {
   }
 }
 
-// Footer
 footer.fixed-bottom {
   background-color: var(--global-footer-bg-color);
   font-size: 0.75rem;
@@ -507,8 +481,6 @@ footer.sticky-bottom {
     text-align: center;
   }
 }
-
-// CV
 
 .cv {
   margin-bottom: 40px;
@@ -553,15 +525,11 @@ footer.sticky-bottom {
   transform: translateX(-15px) translateY(-5px);
 }
 
-// Repositories
-
 @media (min-width: 768px) {
   .repo {
     max-width: 50%;
   }
 }
-
-// Blog
 
 .header-bar {
   border-bottom: 1px solid var(--global-divider-color);
@@ -661,16 +629,12 @@ footer.sticky-bottom {
   }
 }
 
-// Distill
-
 .distill {
   a:hover {
     border-bottom-color: var(--global-theme-color);
     text-decoration: none;
   }
 }
-
-// Projects
 
 .projects {
   a {
@@ -708,8 +672,6 @@ footer.sticky-bottom {
     text-align: right;
   }
 }
-
-// Publications
 
 .publications {
   margin-top: 2rem;
@@ -914,7 +876,6 @@ footer.sticky-bottom {
   }
 }
 
-// Rouge Color Customization
 figure.highlight {
   margin: 0 0 1rem;
 }
@@ -941,7 +902,6 @@ code {
   padding: 3px 3px;
 }
 
-// Transitioning Themes
 html.transition,
 html.transition *,
 html.transition *:before,
@@ -950,7 +910,6 @@ html.transition *:after {
   transition-delay: 0 !important;
 }
 
-// Extra Markdown style (post Customization)
 .post {
   .post-meta {
     color: var(--global-text-color-light);
@@ -976,28 +935,22 @@ html.transition *:after {
 }
 
 progress {
-  /* Positioning */
   position: fixed;
   left: 0;
   top: 56px;
   z-index: 10;
 
-  /* Dimensions */
   width: 100%;
   height: 1px;
 
-  /* Reset the appearance */
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 
-  /* Get rid of the default border in Firefox/Opera. */
   border: none;
 
-  /* Progress bar container for Firefox/IE10  */
   background-color: transparent;
 
-  /* Progress bar value for IE10  */
   color: var(--global-theme-color);
 }
 
@@ -1030,7 +983,6 @@ progress::-moz-progress-bar {
   height: inherit;
 }
 
-/* Copy button */
 .code-display-wrapper {
   position: relative;
 
@@ -1103,7 +1055,6 @@ progress::-moz-progress-bar {
   }
 }
 
-/* Table of Contents */
 nav[data-toggle="toc"] {
   top: 5rem;
 
@@ -1133,9 +1084,7 @@ nav[data-toggle="toc"] {
   }
 }
 
-/* small screens */
 @media (max-width: 576px) {
-  /* override stickyness so that the navigation does not follow scrolling */
   nav[data-toggle="toc"] {
     visibility: hidden;
     height: 0;
@@ -1212,8 +1161,6 @@ swiper-container {
   }
 }
 
-// Ninja Keys
-// for more options, check https://github.com/ssleptsov/ninja-keys?tab=readme-ov-file#css-variables
 ninja-keys {
   --ninja-accent-color: var(--global-theme-color);
   --ninja-icon-size: 0px;
@@ -1229,7 +1176,6 @@ ninja-keys::part(ninja-input-wrapper) {
   background: var(--global-bg-color);
 }
 
-// newsletter
 .newsletter-form-container {
   margin-bottom: 20px;
 }
@@ -1342,46 +1288,40 @@ ninja-keys::part(ninja-input-wrapper) {
   }
 }
 
-// popover is used for annotation in bib.liquid
 .popover {
   background-color: var(--global-bg-color);
   border-color: var(--global-divider-color);
 
   .popover-header {
-    color: var(--global-text-color); // Header text color
+    color: var(--global-text-color);
     border-bottom: 1px solid var(--global-divider-color);
   }
 
   .popover-body {
-    color: var(--global-text-color); // Body text color
+    color: var(--global-text-color);
   }
 }
 
 .bs-popover-top {
-  // arrow fill color
   .arrow::after {
     border-top-color: var(--global-bg-color);
   }
 
-  // arrow border color
   .arrow:before {
     border-top-color: var(--global-divider-color);
   }
 }
 
 .bs-popover-bottom {
-  // arrow fill color
   .arrow::after {
     border-bottom-color: var(--global-bg-color);
   }
 
-  // arrow border color
   .arrow:before {
     border-bottom-color: var(--global-divider-color);
   }
 }
 
-// highlight-search-term
 ::highlight(search) {
   background-color: var(--global-theme-color);
   color: var(--global-text-color);
@@ -1390,7 +1330,7 @@ ninja-keys::part(ninja-input-wrapper) {
 figure.cover {
   display: inline-block;
   text-align: center;
-  margin: 0.5rem; /* adjust as needed */
+  margin: 0.5rem;
 
   img {
     vertical-align: bottom;
@@ -1455,7 +1395,6 @@ figure.cover {
     background-color: #b0abb3;
   }
 
-  /* mouse over link */
   a.cover-link:hover {
     color: #23212d !important;
   }

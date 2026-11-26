@@ -1,10 +1,7 @@
 ---
 permalink: /assets/js/search-data.js
 ---
-// get the ninja-keys element
 const ninja = document.querySelector('ninja-keys');
-
-// add the home and posts menu items
 ninja.data = [
   {%- for page in site.pages -%}
     {%- if page.permalink == '/' -%}{%- assign about_title = page.title | strip -%}{%- endif -%}
@@ -245,13 +242,6 @@ ninja.data = [
           {%- assign social_id = "social-unsplash" -%}
           {%- assign social_title = "Unsplash" -%}
           {%- capture social_url %}"https://unsplash.com/@{{ social[1] }}"{% endcapture -%}
-        {%- comment -%}
-        // check how to add wechat qr code
-        {%- when "wechat_qr" -%}
-          {%- assign social_id = "social-wechat" -%}
-          {%- assign social_title = "WeChat" -%}
-          {%- capture social_url %}"https://wechat.com/{{ social[1] }}"{% endcapture -%}
-        {%- endcomment -%}
         {%- when "whatsapp_number" -%}
           {%- assign social_id = "social-whatsapp" -%}
           {%- assign social_title = "whatsapp" -%}
@@ -271,7 +261,7 @@ ninja.data = [
         {%- when "x_username" -%}
           {%- assign social_id = "social-x" -%}
           {%- assign social_title = "X" -%}
-          {%- capture social_url %}"https://twitter.com/{{ social[1] }}"{% endcapture -%}
+          {%- capture social_url %}"https://x.com/{{ social[1] }}"{% endcapture -%}
         {%- when "youtube_id" -%}
           {%- assign social_id = "social-youtube" -%}
           {%- assign social_title = "YouTube" -%}

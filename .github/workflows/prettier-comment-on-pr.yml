@@ -6,7 +6,6 @@ on:
 
 jobs:
   comment:
-    # available images: https://github.com/actions/runner-images#available-images
     runs-on: ubuntu-latest
     steps:
       - name: PR comment with html diff 💬
